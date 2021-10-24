@@ -1,6 +1,6 @@
 # .adamrc
 
-Scripts and shorthands that come in handy in during my workday.
+Scripts and shorthands that come in handy during my workday.
 
 ## Installation
 
