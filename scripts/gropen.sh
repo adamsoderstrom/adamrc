@@ -3,7 +3,7 @@
 # ––––
 #
 #
-b_flag=''
+
 files=''
 verbose='false'
 
@@ -12,29 +12,50 @@ print_help() {
     echo "Gropen"
     echo "––––"
     echo
-    echo 
-    echo "Syntax: gropen [-b|h]"
+    echo "Syntax: gropen [-b|h|i]"
     echo "options: "
     echo "-b     Access the repo on the current branch"
-    echo "-h     Print this Help."
+    echo "-h     Print this help."
+    echo "-i     Attempt accessing matching issue to the current branch name."
+    echo "       Expecting a branch containing an integer value."
+    echo "       Example: 'feature/*issue_number*' / 'hotfix/*issue_number*' or '*issue_number*'"
     echo
+
+    return 1
 }
 
 
+
 gropen () {
-    while getopts 'abf:v' flag; do
+    b_flag=''
+    h_flag=''
+    i_flag=''
+    open_remote=''
+    while getopts 'bhi' flag; do
         case "${flag}" in
-            b) 
+            b)
                 b_flag='true'
+                open_remote='true'
                 ;;
-            h) 
+            h)
                 print_help
                 ;;
-            *) 
+            i)
+                i_flag='true'
+                open_remote='true'
+                ;;
+            *)
+                open_remote='true'
                 print_help
                 ;;
         esac
     done
+
+    # No options passed
+    if [ $OPTIND -eq 1 ]
+    then
+        open_remote='true'
+    fi
 
     remote=$(git remote get-url --push origin)
 
@@ -44,5 +65,17 @@ gropen () {
         remote="$remote/tree/$branch"
     fi
 
-    open -e $remote
+    if [ "$i_flag" = 'true' ]
+    then
+        branch=$(git branch --show-current)
+        issue_number=$(echo $branch | sed 's/[^0-9]*//g')
+        remote="$remote/issues/$issue_number"
+    fi
+
+    if [ "$open_remote" = 'true' ]
+    then
+        open -e $remote
+    fi
+
+    
 }
