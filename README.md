@@ -1,10 +1,10 @@
 # .adamrc
 
-Scripts and shorthands that come in handy in during my workday.
+Scripts and shorthands that come in handy during my workday.
 
 ## Installation
 
-_Note: Supports only zsh_
+_Note: only supports zsh_
 
 ## 1. Clone repo.
 
