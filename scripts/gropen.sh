@@ -24,8 +24,6 @@ print_help() {
     return 1
 }
 
-
-
 gropen () {
     b_flag=''
     h_flag=''
