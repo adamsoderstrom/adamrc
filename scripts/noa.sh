@@ -43,4 +43,5 @@ ninit () {
     open -a "Toggl Track"
     open -a "Spotify"
     open -a "Slack"
+    open -a "Visual Studio Code"
 }
