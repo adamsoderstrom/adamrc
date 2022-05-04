@@ -3,4 +3,5 @@
 # ––––
 # Aliases for tmux
 #
+alias t="tmux"
 alias tks='tmux kill-session'
