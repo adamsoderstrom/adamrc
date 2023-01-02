@@ -1,5 +1,5 @@
 #
-# Gropen
+# Git snippets
 # ––––
 #
 #
@@ -23,6 +23,9 @@ print_help() {
 
     return 1
 }
+
+# guf - List git untracked files
+alias guf="git ls-files --others --exclude-standard"
 
 gropen () {
     b_flag=''
