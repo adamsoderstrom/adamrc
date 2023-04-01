@@ -9,3 +9,5 @@ source $SCRIPTS_DIR/noa.sh
 source $SCRIPTS_DIR/shorthands.sh
 source $SCRIPTS_DIR/t.sh
 source $SCRIPTS_DIR/y.sh
+
+export PATH=$PATH:~/.cargo/bin
