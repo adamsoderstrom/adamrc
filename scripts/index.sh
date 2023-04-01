@@ -1,5 +1,6 @@
 export SCRIPTS_DIR=`dirname "$0"`
 
+source $SCRIPTS_DIR/bat.sh
 source $SCRIPTS_DIR/ffmpeg.sh
 source $SCRIPTS_DIR/git_snippets.sh
 source $SCRIPTS_DIR/misc.sh
