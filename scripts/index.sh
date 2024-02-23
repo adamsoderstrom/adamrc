@@ -13,3 +13,5 @@ source $SCRIPTS_DIR/t.sh
 source $SCRIPTS_DIR/y.sh
 
 export PATH=$PATH:~/.cargo/bin
+export PATH=$PATH:$(go env GOPATH)/bin
+
