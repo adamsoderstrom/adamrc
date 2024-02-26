@@ -6,3 +6,4 @@
 alias refresh="source ~/.zshrc"
 alias nowplaying="nowplaying-cli"
 alias adambrew="brew bundle dump --force --file=~/.adamrc/Brewfile"
+alias cal="gcal --starting-day=1"
