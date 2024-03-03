@@ -1,0 +1,16 @@
+#compdef lenv
+
+_lenv() {
+  local state
+  envfile=$(find . -maxdepth 1 -name '.env.local' -o -name '.env' | head -n 1)
+
+  _arguments \
+    '1: :->key' \
+
+  case $state in
+    (key) compadd "$@" $(cat $envfile | rg '^(\w*)=' -or '$1') ;;
+  esac
+}
+
+_lenv "$@"
+

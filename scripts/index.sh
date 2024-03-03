@@ -19,3 +19,5 @@ source $SCRIPTS_DIR/y.sh
 export PATH=$PATH:~/.cargo/bin
 export PATH=$PATH:$(go env GOPATH)/bin
 
+export fpath=($SCRIPTS_DIR/../completions $fpath)
+
