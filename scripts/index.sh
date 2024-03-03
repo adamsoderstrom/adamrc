@@ -6,6 +6,7 @@ source $SCRIPTS_DIR/chck.sh
 source $SCRIPTS_DIR/envf.sh
 source $SCRIPTS_DIR/ffmpeg.sh
 source $SCRIPTS_DIR/git_snippets.sh
+source $SCRIPTS_DIR/lenv.sh
 source $SCRIPTS_DIR/misc.sh
 source $SCRIPTS_DIR/next.sh
 source $SCRIPTS_DIR/noa.sh
