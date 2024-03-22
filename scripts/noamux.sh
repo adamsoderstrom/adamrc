@@ -1,15 +1,5 @@
 #!/bin/bash
 
-function noa() {
-  if [[ -d "$HOME/Documents/NoA/Projects/$1" ]];
-  then
-    create_attach_switch_to_tmux_session $1
-  else
-    echo "$1 isn't found among NoA projects"
-    return 1
-  fi
-}
-
 function create_attach_switch_to_tmux_session() {
   tmux has-session -t $1 2>/dev/null
   SESSION_EXISTS=$?
@@ -37,4 +27,32 @@ function create_attach_switch_to_tmux_session() {
       tmux new-session -s $1 -c "$HOME/Documents/NoA/Projects/$1"
     fi
   fi
+}
+
+function ign() {
+  targeted_ign_repo="$1"
+
+  if [[ -z "$1" ]]; then
+    # If no repo is targeted, select one from all @noaignite repos
+    repos=$(gh repo list noaignite --no-archived -L 200 --json name,url)
+    repo_names=$(echo "$repos" | jq -r '.[].name')
+
+    targeted_ign_repo=$(echo "$repo_names" | gum filter --placeholder "Repo name" --no-limit)
+  fi
+
+  local_matches="$(ls -d $HOME/Documents/NoA/Projects/* | rg ".*($targeted_ign_repo)" -or '$1')"
+
+  if [[ -z "$local_matches" ]] && [[ -n "$targeted_ign_repo" ]]; then
+    echo "No local matches found for $targeted_ign_repo. Cloning from GitHub..."
+    gh repo clone noaignite/$targeted_ign_repo $HOME/Documents/NoA/Projects/$targeted_ign_repo
+    local_matches="$(ls -d $HOME/Documents/NoA/Projects/* | rg ".*($targeted_ign_repo)" -or '$1')"
+  fi
+
+  if [[ $(echo "$local_matches" | wc -l) -gt 1 ]]; then
+    echo "Multiple local matches found for $targeted_ign_repo"
+    echo "$local_matches"
+    exit 1
+  fi
+
+  create_attach_switch_to_tmux_session "$local_matches"
 }
