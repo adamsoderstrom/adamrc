@@ -5,6 +5,7 @@ source $SCRIPTS_DIR/cgpt.sh
 source $SCRIPTS_DIR/chck.sh
 source $SCRIPTS_DIR/envf.sh
 source $SCRIPTS_DIR/ffmpeg.sh
+source $SCRIPTS_DIR/gh.sh
 source $SCRIPTS_DIR/git_snippets.sh
 source $SCRIPTS_DIR/lenv.sh
 source $SCRIPTS_DIR/misc.sh
