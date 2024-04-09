@@ -4,6 +4,7 @@ Scripts and shorthands that come in handy during my workday.
 
 hej
 hoj
+haj
 
 ## Installation
 
