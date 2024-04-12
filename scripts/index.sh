@@ -13,6 +13,7 @@ source $SCRIPTS_DIR/next.sh
 source $SCRIPTS_DIR/noa.sh
 source $SCRIPTS_DIR/noamux.sh
 source $SCRIPTS_DIR/nxb.sh
+source $SCRIPTS_DIR/pplx.sh
 source $SCRIPTS_DIR/shorthands.sh
 source $SCRIPTS_DIR/smackdown.sh
 source $SCRIPTS_DIR/t.sh
