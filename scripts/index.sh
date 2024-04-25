@@ -3,6 +3,7 @@ export SCRIPTS_DIR=`dirname "$0"`
 source $SCRIPTS_DIR/bat.sh
 source $SCRIPTS_DIR/cgpt.sh
 source $SCRIPTS_DIR/chck.sh
+source $SCRIPTS_DIR/cmus.sh
 source $SCRIPTS_DIR/envf.sh
 source $SCRIPTS_DIR/ffmpeg.sh
 source $SCRIPTS_DIR/gh.sh
