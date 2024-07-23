@@ -51,7 +51,7 @@ function ign() {
   if [[ $(echo "$local_matches" | wc -l) -gt 1 ]]; then
     echo "Multiple local matches found for $targeted_ign_repo"
     echo "$local_matches"
-    exit 1
+    return 1
   fi
 
   create_attach_switch_to_tmux_session "$local_matches"
