@@ -40,7 +40,7 @@ function ign() {
     targeted_ign_repo=$(echo "$repo_names" | gum filter --placeholder "Repo name" --no-limit)
   fi
 
-  local_matches="$(ls -d $HOME/Documents/NoA/Projects/* | rg ".*($targeted_ign_repo)" -or '$1')"
+  local_matches="$(ls -d $HOME/Documents/NoA/Projects/* | rg ".*($targeted_ign_repo)$" -or '$1')"
 
   if [[ -z "$local_matches" ]] && [[ -n "$targeted_ign_repo" ]]; then
     echo "No local matches found for $targeted_ign_repo. Cloning from GitHub..."
