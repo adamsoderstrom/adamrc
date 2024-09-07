@@ -1,0 +1,9 @@
+[user]
+	name = adamsoderstrom
+	email = adamsoderstrom@me.com
+[alias]
+	adog = log --all --decorate --oneline --graph
+[init]
+	defaultBranch = main
+[core]
+	excludesfile = /Users/adamsoderstrom/.gitignore
