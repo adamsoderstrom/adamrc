@@ -48,11 +48,6 @@ return {
     config = function() vim.cmd "colorscheme kanagawa" end,
   },
   {
-    "echasnovski/mini.ai",
-    version = "*",
-    config = function(_, opts) require("mini.ai").setup(opts) end,
-  },
-  {
     "L3MON4D3/LuaSnip",
     dependencies = { "rafamadriz/friendly-snippets" },
     config = function(plugin, opts)
