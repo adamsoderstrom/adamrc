@@ -11,5 +11,3 @@ vopen() {
   
   open "https://$project_name-git-$branch_name_formatted-$scope_slug.vercel.app/"
 }
-
-vopen
