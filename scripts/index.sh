@@ -18,6 +18,7 @@ source $SCRIPTS_DIR/pplx.sh
 source $SCRIPTS_DIR/shorthands.sh
 source $SCRIPTS_DIR/smackdown.sh
 source $SCRIPTS_DIR/t.sh
+source $SCRIPTS_DIR/vopen.sh
 source $SCRIPTS_DIR/y.sh
 
 export PATH=$PATH:~/.cargo/bin
