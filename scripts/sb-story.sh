@@ -1,3 +1,5 @@
+#!/bin/zsh
+
 sb-story() {
   story_args="null"
   component_name=$(echo "$1" | sed 's/\.\/\(.*\)/\1/' )
