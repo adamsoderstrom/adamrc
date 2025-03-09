@@ -20,3 +20,5 @@
     colorMoved = default
 [http]
 	postBuffer = 157286400
+[branch]
+    sort = -committerdate
