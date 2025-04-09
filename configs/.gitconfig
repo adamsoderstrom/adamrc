@@ -18,6 +18,8 @@
     conflictstyle = diff3
 [diff]
     colorMoved = default
+[rebase]
+    autosquash = true
 [http]
 	postBuffer = 157286400
 [branch]
