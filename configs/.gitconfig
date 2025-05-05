@@ -1,3 +1,5 @@
+[pull]
+    ff=only
 [user]
 	name = adamsoderstrom
 	email = adamsoderstrom@me.com
