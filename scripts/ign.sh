@@ -42,7 +42,7 @@ function ign() {
 
   if [[ -z "$1" ]]; then
     # If no repo is targeted, select one from all @noaignite repos
-    repos=$(bkt --stale=1m -- gh repo list noaignite --no-archived -L 200 --json name,url)
+    repos=$(bkt --ttl=2m --stale=1m -- gh repo list noaignite --no-archived -L 200 --json name,url)
     repo_names=$(echo "$repos" | jq -r '.[].name')
 
     targeted_ign_repo=$(echo "$repo_names" | gum filter --placeholder "Repo name" --no-limit)
