@@ -22,6 +22,8 @@
     colorMoved = default
 [rebase]
     autosquash = true
+[rerere]
+    enabled = true
 [http]
 	postBuffer = 157286400
 [branch]
