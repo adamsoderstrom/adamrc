@@ -1,7 +1,7 @@
 #
 # app shortcuts
 #
-alt - space : open -a "Kitty"
+alt - space : open -a "Ghostty"
 alt - i : open -a "Brave browser"
 alt - o : open -a "Obsidian"
 ctrl + alt - h : open -a "Music"
