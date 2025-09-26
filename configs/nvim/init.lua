@@ -26,5 +26,10 @@ vim.api.nvim_create_autocmd("FileType", {
   callback = function() vim.opt_local.makeprg = "tsx %" end,
 })
 
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "javascript",
+  callback = function() vim.opt_local.makeprg = "node %" end,
+})
+
 require "lazy_setup"
 require "polish"
