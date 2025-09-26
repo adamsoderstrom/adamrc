@@ -21,5 +21,10 @@ if not pcall(require, "lazy") then
   vim.cmd.quit()
 end
 
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "typescript",
+  callback = function() vim.opt_local.makeprg = "tsx %" end,
+})
+
 require "lazy_setup"
 require "polish"
