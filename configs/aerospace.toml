@@ -221,3 +221,7 @@ alt-shift-l = ['join-with right', 'mode main']
     if.app-id = 'com.apple.systempreferences'
     run = ['layout floating', 'move-node-to-workspace s']
 
+# Workspace f
+[[on-window-detected]]
+    if.app-id = 'com.apple.finder'
+    run = ['layout tiling', 'move-node-to-workspace f']
