@@ -215,3 +215,9 @@ alt-shift-l = ['join-with right', 'mode main']
 [[on-window-detected]]
     if.app-id = 'com.apple.iCal'
     run = ['layout tiling', 'move-node-to-workspace c']
+
+# Workspace s
+[[on-window-detected]]
+    if.app-id = 'com.apple.systempreferences'
+    run = ['layout floating', 'move-node-to-workspace s']
+
