@@ -154,3 +154,59 @@ alt-shift-h = ['join-with left', 'mode main']
 alt-shift-j = ['join-with down', 'mode main']
 alt-shift-k = ['join-with up', 'mode main']
 alt-shift-l = ['join-with right', 'mode main']
+
+# Designated workspaces for some applications
+
+# Workspace 1
+[[on-window-detected]]
+    if.app-id = 'com.mitchellh.ghostty'
+    run = ['layout tiling', 'move-node-to-workspace 1']
+
+[[on-window-detected]]
+    if.app-id = 'com.brave.Browser'
+    run = ['layout tiling', 'move-node-to-workspace 1']
+
+# Workspace 2
+[[on-window-detected]]
+    if.app-id = 'com.tinyspeck.slackmacgap'
+    run = ['layout tiling', 'move-node-to-workspace 2']
+
+# Workspace 3
+[[on-window-detected]]
+    if.app-id = 'md.obsidian'
+    run = ['layout tiling', 'move-node-to-workspace 3']
+
+# Workspace 4
+[[on-window-detected]]
+    if.app-id = 'com.apple.Music'
+    run = ['layout tiling', 'move-node-to-workspace 4']
+
+# Workspace 5
+[[on-window-detected]]
+    if.app-id = 'com.apple.mail'
+    run = ['layout tiling', 'move-node-to-workspace 5']
+
+# Workspace 6
+[[on-window-detected]]
+    if.app-id = 'com.figma.Desktop'
+    run = ['layout tiling', 'move-node-to-workspace 6']
+
+# Workspace 7
+[[on-window-detected]]
+    if.app-id = 'com.usebruno.app'
+    run = ['layout tiling', 'move-node-to-workspace 7']
+
+# Workspace 8
+[[on-window-detected]]
+    if.app-id = 'com.microsoft.teams2'
+    run = ['layout tiling', 'move-node-to-workspace 8']
+
+# Workspace 9
+[[on-window-detected]]
+    if.app-id = 'com.ranchero.NetNewsWire-Evergreen'
+    run = ['layout tiling', 'move-node-to-workspace 9']
+
+# Workspace B
+[[on-window-detected]]
+    if.app-id = 'com.bambulab.bambu-studio'
+    run = ['layout tiling', 'move-node-to-workspace b']
