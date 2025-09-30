@@ -206,7 +206,7 @@ alt-shift-l = ['join-with right', 'mode main']
     if.app-id = 'com.ranchero.NetNewsWire-Evergreen'
     run = ['layout tiling', 'move-node-to-workspace 9']
 
-# Workspace B
+# Workspace b
 [[on-window-detected]]
     if.app-id = 'com.bambulab.bambu-studio'
     run = ['layout tiling', 'move-node-to-workspace b']
