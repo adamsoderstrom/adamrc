@@ -1,15 +1,9 @@
-tap "astronomer/cloud"
-tap "craftcms/nitro"
-tap "dominikbraun/timetrace"
 tap "gromgit/brewtils"
 tap "guumaster/tap"
-tap "heroku/brew"
-tap "homebrew-zathura/zathura"
 tap "homebrew/bundle"
 tap "homebrew/cask"
 tap "homebrew/core"
 tap "homebrew/services"
-tap "japelsin/tap"
 tap "jesseduffield/lazygit"
 tap "jstkdng/programs"
 tap "kardolus/chatgpt-cli"
@@ -171,7 +165,6 @@ brew "yazi"
 brew "z"
 # Simple hotkey-daemon for macOS.
 brew "koekeishiya/formulae/skhd"
-brew "ymtdzzz/tap/otel-tui"
 # Password manager that keeps all passwords secure behind one password
 cask "1password"
 # Command-line interface for 1Password
