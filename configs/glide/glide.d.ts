@@ -1,5 +1,5 @@
 /* ======================================================
-                Glide version: 0.1.55a
+                Glide version: 0.1.56a
    ====================================================== */
 
 declare const GLIDE_EXCOMMANDS: [
@@ -843,6 +843,10 @@ declare global {
 			 * ```
 			 */
 			show(opts?: glide.CommandLineShowOpts): Promise<void>;
+			/**
+			 * If the commandline is open and focused.
+			 */
+			is_active(): boolean;
 		};
 		excmds: {
 			/**
@@ -986,7 +990,7 @@ declare global {
 				 *
 				 * This is executed in the content process.
 				 */
-				action?: "click" | "newtab-click" | ((target: HTMLElement) => Promise<void>);
+				action?: glide.HintAction;
 				/**
 				 * Which area to generate hints for.
 				 *
@@ -997,16 +1001,57 @@ declare global {
 				 */
 				location?: glide.HintLocation;
 				/**
+				 * A function to produce labels for the given hints. You can provide
+				 * your own function or use an included one:
+				 *
+				 *  - {@link glide.hints.label_generators.prefix_free}; this is the default.
+				 *  - {@link glide.hints.label_generators.numeric}
+				 *
+				 * For example:
+				 *
+				 * ```typescript
+				 * glide.hints.show({
+				 *   label_generator: ({ hints }) => Array.from({ length: hints.length }).map((_, i) => String(i))
+				 * });
+				 * ```
+				 *
+				 * Or using data from the hinted elements through `content.execute()`:
+				 *
+				 * ```typescript
+				 * glide.hints.show({
+				 *   async label_generator({ content }) {
+				 *     const texts = await content.execute((element) => element.textContent);
+				 *     return texts.map((text) => text.trim().toLowerCase().slice(0, 2));
+				 *   },
+				 * });
+				 * ```
+				 * note: the above example is a very naive implementation and will result in issues if there are multiple
+				 *       elements that start with the same text.
+				 */
+				label_generator?: glide.HintLabelGenerator;
+				/**
 				 * Define a callback to filter the resolved hints. It is called once with the resolved hints,
 				 * and must return an array of the hints you want to include.
 				 *
 				 * An empty array may be returned but will result in an error notification indicating that no
 				 * hints were found.
-				 *
-				 * @content this function is evaluated in the content process.
 				 */
-				pick?: (hints: glide.ContentHint[]) => glide.ContentHint[];
+				pick?: glide.HintPicker;
 			}): void;
+			label_generators: {
+				/**
+				 * Use with {@link glide.o.hint_label_generator} to generate
+				 * prefix-free combinations of the characters in
+				 * {@link glide.o.hint_chars}.
+				 */
+				prefix_free: glide.HintLabelGenerator;
+				/**
+				 * Use with {@link glide.o.hint_label_generator} to generate
+				 * sequential numeric labels, starting at `1` and counting up.
+				 * Ignores {@link glide.o.hint_chars}.
+				 */
+				numeric: glide.HintLabelGenerator;
+			};
 		};
 		buf: {
 			prefs: {
@@ -1282,6 +1327,10 @@ declare global {
 			register<Mode extends keyof GlideModes>(mode: Mode, opts: {
 				caret: "block" | "line" | "underline";
 			}): void;
+			/**
+			 * List all registered modes.
+			 */
+			list(): GlideMode[];
 		};
 	};
 	/**
@@ -1395,6 +1444,34 @@ declare global {
 		 */
 		hint_chars: string;
 		/**
+		 * A function to produce labels for the given hints. You can provide
+		 * your own function or use an included one:
+		 *
+		 *  - {@link glide.hints.label_generators.prefix_free}; this is the
+		 *    default.
+		 *
+		 *  - {@link glide.hints.label_generators.numeric}
+		 *
+		 * For example:
+		 * ```typescript
+		 * glide.o.hint_label_generator = ({ hints }) => Array.from({ length: hints.length }).map((_, i) => String(i));
+		 * ```
+		 *
+		 * Or using data from the hinted elements through `content.execute()`:
+		 *
+		 * ```typescript
+		 * glide.hints.show({
+		 *   async label_generator({ content }) {
+		 *     const texts = await content.execute((element) => element.textContent);
+		 *     return texts.map((text) => text.trim().toLowerCase().slice(0, 2));
+		 *   },
+		 * });
+		 * ```
+		 * note: the above example is a very naive implementation and will result in issues if there are multiple
+		 *       elements that start with the same text.
+		 */
+		hint_label_generator: glide.HintLabelGenerator;
+		/**
 		 * Determines if the current mode will change when certain element types are focused.
 		 *
 		 * For example, if `true` then Glide will automatically switch to `insert` mode when an editable element is focused.
@@ -1450,6 +1527,8 @@ declare global {
 		constructor(message: string, props: {
 			path: string;
 		});
+	}
+	class DataCloneError extends Error {
 	}
 	class GlideProcessError extends Error {
 		process: glide.CompletedProcess;
@@ -1646,15 +1725,73 @@ declare global {
 		// custom
 		 | keyof ExcmdRegistry | `${keyof ExcmdRegistry} ${string}`;
 		/// @docs-skip
-		export type ContentHint = {
+		export type Hint = {
 			id: number;
 			x: number;
 			y: number;
 			width: number;
 			height: number;
+		};
+		/// @docs-skip
+		export type ContentHint = glide.Hint & {
 			element: HTMLElement;
 		};
+		/// @docs-skip
+		export type ResolvedHint = glide.Hint & {
+			label: string;
+		};
+		export type HintLabelGenerator = (ctx: HintLabelGeneratorProps) => string[] | Promise<string[]>;
+		export type HintLabelGeneratorProps = {
+			hints: glide.Hint[];
+			content: {
+				/**
+				 * Executes the given callback in the content process to extract properties
+				 * from the all elements that are being hinted.
+				 *
+				 * For example:
+				 * ```typescript
+				 * const texts = await content.map((target) => target.textContent);
+				 * ```
+				 */
+				map<R>(cb: (target: HTMLElement, index: number) => R | Promise<R>): Promise<Awaited<R>[]>;
+			};
+		};
+		export type HintPicker = (props: glide.HintPickerProps) => glide.Hint[] | Promise<glide.Hint[]>;
+		export type HintPickerProps = {
+			hints: glide.Hint[];
+			content: {
+				/**
+				 * Executes the given callback in the content process to extract properties
+				 * from the all elements that are being hinted.
+				 *
+				 * For example:
+				 * ```typescript
+				 * const areas = await content.map((element) => element.offsetWidth * element.offsetHeight);
+				 * ```
+				 */
+				map<R>(cb: (target: HTMLElement, index: number) => R | Promise<R>): Promise<Awaited<R>[]>;
+			};
+		};
 		export type HintLocation = "content" | "browser-ui";
+		export type HintAction = "click" | "newtab-click" | ((props: glide.HintActionProps) => Promise<void> | void);
+		export type HintActionProps = {
+			/**
+			 * The resolved hint that is being executed.
+			 */
+			hint: glide.ResolvedHint;
+			content: {
+				/**
+				 * Execute the given callback in the content process to extract properties
+				 * from the hint element.
+				 *
+				 * For example:
+				 * ```typescript
+				 * const href = await content.execute((target) => target.href);
+				 * ```
+				 */
+				execute<R>(cb: (target: HTMLElement) => R | Promise<R>): Promise<R extends Promise<infer U> ? U : R>;
+			};
+		};
 		export type SplitViewCreateOpts = {
 			id?: string;
 		};
@@ -1753,6 +1890,23 @@ declare global {
 			 * ```
 			 */
 			render?(): HTMLElement;
+			/**
+			 * Optional callback used to determine if this option matches the input entered in the commandline.
+			 *
+			 * This is called every time the input changes.
+			 *
+			 * `null` can be returned to defer to the default matcher.
+			 *
+			 * @example
+			 * ```typescript
+			 * matches({ input }) {
+			 *   return my_fuzzy_matcher(input, [bookmark.title]);
+			 * }
+			 * ```
+			 */
+			matches?(props: {
+				input: string;
+			}): boolean | null;
 			/**
 			 * Callback that is invoked when `<enter>` is pressed while this option is focused.
 			 *
@@ -1923,9 +2077,10 @@ declare global {
 		 *
 		 * `<C-` -> `<C-a>` | `<C-D-` ...
 		 * `<leader>` -> `<leader>f` | `<leader><CR>` ...
+		 * `<leader>-` -> `<leader>-a` | `<leader>-<CR>` ...
 		 * `g` -> `gg` | `gj` ...
 		 */
-		type T<LHS> = LHS extends "" ? SingleKey : LHS extends "<" ? SpecialKey | `<${ModifierKey}-` : LHS extends `${infer S}<${infer M}-` ? `${S}<${M}-${Exclude<StripAngles<SingleKey>, ModifierKey>}>` | `${S}<${M}-${ModifierKey}-` | (S & {}) : LHS extends `${infer S}<` ? `${S}${SpecialKey}` | S : LHS extends `${infer S}` ? `${S}${SingleKey}` | S : LHS;
+		type T<LHS> = LHS extends "" ? SingleKey : LHS extends "<" ? LHS | SpecialKey | `<${ModifierKey}-` : LHS extends `${infer S}<${infer M}-` ? LHS | `${S}<${M}-${Exclude<StripAngles<SingleKey>, ModifierKey>}>` | `${S}<${M}-${ModifierKey}-` : LHS extends `${infer S}<` ? LHS | `${S}${SpecialKey}` : LHS extends `${infer S}-` ? LHS | `${S}-${SingleKey}` : LHS extends `${infer S}` ? LHS | `${S}${SingleKey}` : LHS;
 		/**
 		 * e.g. a, b, <leader>
 		 */

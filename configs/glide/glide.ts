@@ -87,9 +87,4 @@ glide.keymaps.set("normal", "<leader>ls", async () => {
   await browser.tabs.update(sanityStudioTab.id, { active: true });
 }, { description: "go to [l]ocalhost [s]anity studio" });
 
-
-
-  assert(sanityStudioTab && sanityStudioTab.id);
-
-  await browser.tabs.update(sanityStudioTab.id, { active: true });
-}, { description: "go to [l]ocalhost [s]anity studio" });
+glide.unstable.include("glide.private.ts");
