@@ -13,6 +13,7 @@ tap "nikitabobko/tap"
 tap "noahgorstein/tap"
 tap "oven-sh/bun"
 tap "plutov/tap"
+cask "plutov/tap/oq"
 tap "rockymadden/rockymadden"
 tap "samtay/tui"
 tap "thefox/brewery"
@@ -205,8 +206,6 @@ cask "obs"
 cask "obsidian"
 # Programmable solid 3D CAD modeller
 cask "openscad"
-# Terminal OpenAPI Spec viewer
-cask "oq"
 # Browser for ambitious developers
 cask "polypane"
 # File sharing network
