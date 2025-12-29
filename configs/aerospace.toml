@@ -163,7 +163,7 @@ alt-shift-l = ['join-with right', 'mode main']
     run = ['layout tiling', 'move-node-to-workspace 1']
 
 [[on-window-detected]]
-    if.app-id = 'com.brave.Browser'
+    if.app-id = 'com.vivaldi.Vivaldi'
     run = ['layout tiling', 'move-node-to-workspace 1']
 
 # Workspace 2
