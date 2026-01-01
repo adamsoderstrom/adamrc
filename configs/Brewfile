@@ -138,8 +138,6 @@ brew "neovim"
 brew "tree"
 # Password manager
 brew "pass"
-# Pinentry for GPG on Mac
-brew "pinentry-mac"
 # Process Management Interface for HPC environments
 brew "pmix"
 # PDF rendering library (based on the xpdf-3.0 code base)
