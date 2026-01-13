@@ -29,11 +29,16 @@ return {
 
   -- You can also easily customize additional setup of plugins that is outside of the plugin's setup call
   {
-    "rebelot/kanagawa.nvim",
-    lazy = false,
-    priority = 1000,
-    config = function() vim.cmd "colorscheme kanagawa" end,
+    "kepano/flexoki-neovim",
+    name = "flexoki",
+    config = function() vim.cmd "colorscheme flexoki" end,
   },
+  -- {
+  --   "rebelot/kanagawa.nvim",
+  --   lazy = false,
+  --   priority = 1000,
+  --   config = function() vim.cmd "colorscheme kanagawa" end,
+  -- },
   {
     "L3MON4D3/LuaSnip",
     dependencies = { "rafamadriz/friendly-snippets" },
