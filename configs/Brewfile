@@ -37,8 +37,6 @@ brew "cryptography"
 brew "python-setuptools"
 # Interpreted, interactive, object-oriented programming language
 brew "python@3.11"
-# Automate deployment, configuration, and upgrading
-brew "ansible@8"
 # New file format for still image compression
 brew "jpeg-xl"
 # Codec library for encoding and decoding AV1 video streams
@@ -85,8 +83,6 @@ brew "freetds"
 brew "fswatch"
 # Command-line fuzzy finder written in Go
 brew "fzf"
-# Program for calculating and printing calendars
-brew "gcal"
 # GNU compiler collection
 brew "gcc"
 # GitHub command-line tool
