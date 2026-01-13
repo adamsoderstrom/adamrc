@@ -4,7 +4,7 @@
 alt - space : open -a "Ghostty"
 alt - i : open -a "Vivaldi"
 alt - o : open -a "Obsidian"
-ctrl + alt - h : open -a "Music"
+ctrl + alt - h : open -a "Manet"
 alt - p : open -a "Bruno"
 alt - n : open -a "Slack"
 alt - t : open -a "Telegram"

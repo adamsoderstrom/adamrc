@@ -18,6 +18,7 @@ tap "rockymadden/rockymadden"
 tap "samtay/tui"
 tap "thefox/brewery"
 tap "ymtdzzz/tap"
+mas "Manet", id: 6470928235
 # GNU internationalization (i18n) and localization (l10n) library
 brew "gettext"
 # Core application library for C
