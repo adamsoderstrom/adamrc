@@ -9,10 +9,10 @@ export PATH=$PATH:/opt/homebrew/sbin
 
 # Path to your oh-my-zsh installation.
 # Please install it according to the installation docs: https://ohmyz.sh/#install
-export ZSH="/Users/adamsoderstrom/.oh-my-zsh"
+export ZSH="/Users/$USER/.oh-my-zsh"
 
 # Path to your adam installation.
-export ADAM="/Users/$USER/.adamrc"
+export ADAM="/Users/$USER/adamrc"
 
 export TERM=xterm-256color
 export EDITOR=nvim
@@ -35,7 +35,7 @@ source $ADAM/scripts/index.sh
 source $ADAM/vars.sh
 
 # pnpm
-export PNPM_HOME="/Users/adamsoderstrom/Library/pnpm"
+export PNPM_HOME="/Users/$USER/Library/pnpm"
 case ":$PATH:" in
   *":$PNPM_HOME:"*) ;;
   *) export PATH="$PNPM_HOME:$PATH" ;;
