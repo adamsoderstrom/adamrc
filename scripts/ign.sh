@@ -32,17 +32,9 @@ function create_attach_switch_to_tmux_session() {
 function ign() {
   targeted_ign_repo="$1"
 
-  if ! command -v bkt 2>&1 >/dev/null
-  then
-      echo "the 'bkt' CLI could not be found."
-      echo "Please read more about it and install it from here: "
-      echo "https://github.com/dimo414/bkt"
-      return
-  fi
-
   if [[ -z "$1" ]]; then
     # If no repo is targeted, select one from all @noaignite repos
-    repos=$(bkt --ttl=1week --stale=5m -- gh repo list noaignite --no-archived -L 200 --json name,url)
+    repos=$(gh repo list noaignite --no-archived -L 200 --json name,url)
     repo_names=$(echo "$repos" | jq -r '.[].name')
 
     targeted_ign_repo=$(echo "$repo_names" | gum filter --placeholder "Repo name" --no-limit)
