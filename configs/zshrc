@@ -1,0 +1,45 @@
+# Profiling start
+if [[ -n "$ZSH_DEBUGRC" ]]; then
+  zmodload zsh/zprof
+fi
+
+# Path to your Homebrew installation.
+export PATH=/opt/homebrew/bin:$PATH
+export PATH=$PATH:/opt/homebrew/sbin
+
+# Path to your oh-my-zsh installation.
+# Please install it according to the installation docs: https://ohmyz.sh/#install
+export ZSH="/Users/adamsoderstrom/.oh-my-zsh"
+
+# Path to your adam installation.
+export ADAM="/Users/$USER/.adamrc"
+
+export TERM=xterm-256color
+export EDITOR=nvim
+
+export LC_ALL=en_US.UTF-8
+
+# z initialization
+. $(brew --prefix)/etc/profile.d/z.sh
+
+ZSH_THEME="apple" # set by `omz`
+
+plugins=(git)
+plugins+=(zsh-nvm)
+
+export NVM_AUTO_USE=true
+export NVM_NO_USE=true
+
+source $ZSH/oh-my-zsh.sh
+source $ADAM/scripts/index.sh
+source $ADAM/vars.sh
+
+# pnpm
+export PNPM_HOME="/Users/adamsoderstrom/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
+
+autoload -U compinit; compinit
