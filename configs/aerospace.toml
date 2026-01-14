@@ -178,7 +178,7 @@ alt-shift-l = ['join-with right', 'mode main']
 
 # Workspace 4
 [[on-window-detected]]
-    if.app-id = 'com.apple.Music'
+    if.app-id = 'dev.tilo.Manet'
     run = ['layout tiling', 'move-node-to-workspace 4']
 
 # Workspace 5
