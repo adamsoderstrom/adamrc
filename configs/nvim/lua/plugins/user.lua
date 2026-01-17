@@ -35,7 +35,30 @@ return {
     opts = {},
     config = function()
       vim.cmd "colorscheme flexoki"
-      vim.o.background = "dark"
+
+      require("flexoki").setup {
+        theme = "dark",
+        highlight_override = function(colors)
+          return {
+            ["@function"] = { fg = colors.paper },
+            ["@function.call"] = { fg = colors.red },
+            ["@function.method.call.typescript"] = { fg = colors.yellow },
+            ["@keyword"] = { fg = colors.magenta },
+            ["@keyword.export"] = { fg = colors.magenta },
+            ["@keyword.import"] = { fg = colors.magenta },
+            ["@property"] = { fg = colors.yellow },
+            ["@tag"] = { fg = colors.red },
+            ["@tag.attribute"] = { fg = colors.yellow },
+            ["@type"] = { fg = colors.yellow },
+            ["@type.import"] = { fg = colors.red },
+            ["@variable"] = { fg = colors.paper },
+            ["@variable.parameter"] = { fg = colors.cyan },
+          }
+        end,
+      }
+      -- vim.o.background = "dark"
+      --
+      -- -- Override specific highlight groups
     end,
   },
   -- {
