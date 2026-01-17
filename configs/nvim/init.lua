@@ -9,8 +9,6 @@ vim.opt.rtp:prepend(lazypath)
 
 vim.o.shell = "zsh -i"
 
-vim.o.background = "dark"
-
 -- validate that lazy is available
 if not pcall(require, "lazy") then
   -- stylua: ignore

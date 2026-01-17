@@ -33,7 +33,10 @@ return {
     lazy = false,
     priority = 1000,
     opts = {},
-    config = function() vim.cmd "colorscheme flexoki" end,
+    config = function()
+      vim.cmd "colorscheme flexoki"
+      vim.o.background = "dark"
+    end,
   },
   -- {
   --   "rebelot/kanagawa.nvim",
