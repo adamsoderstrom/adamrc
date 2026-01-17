@@ -11,10 +11,6 @@ vim.o.shell = "zsh -i"
 
 vim.o.background = "dark"
 
--- Augment
-vim.g.augment_workspace_folders = { "/Users/adamsoderstrom/Documents/adamsoderstrom/www/projects/radarpar/app" }
-vim.g.augment_disable_completions = true
-
 -- validate that lazy is available
 if not pcall(require, "lazy") then
   -- stylua: ignore
