@@ -29,8 +29,10 @@ return {
 
   -- You can also easily customize additional setup of plugins that is outside of the plugin's setup call
   {
-    "kepano/flexoki-neovim",
-    name = "flexoki",
+    "cpplain/flexoki.nvim",
+    lazy = false,
+    priority = 1000,
+    opts = {},
     config = function() vim.cmd "colorscheme flexoki" end,
   },
   -- {
