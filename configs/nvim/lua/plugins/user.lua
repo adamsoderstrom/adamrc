@@ -46,13 +46,14 @@ return {
             ["@keyword"] = { fg = colors.magenta },
             ["@keyword.export"] = { fg = colors.magenta },
             ["@keyword.import"] = { fg = colors.magenta },
+            ["@lsp.type.interface"] = { fg = colors.yellow },
             ["@property"] = { fg = colors.yellow },
             ["@tag"] = { fg = colors.red },
             ["@tag.attribute"] = { fg = colors.yellow },
             ["@type"] = { fg = colors.yellow },
             ["@type.import"] = { fg = colors.red },
             ["@variable"] = { fg = colors.paper },
-            ["@variable.parameter"] = { fg = colors.cyan },
+            ["@variable.parameter"] = { fg = colors.paper },
           }
         end,
       }
