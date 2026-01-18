@@ -1,9 +1,5 @@
 tap "gromgit/brewtils"
 tap "guumaster/tap"
-tap "homebrew/bundle"
-tap "homebrew/cask"
-tap "homebrew/core"
-tap "homebrew/services"
 tap "jesseduffield/lazygit"
 tap "jstkdng/programs"
 tap "kardolus/chatgpt-cli"
@@ -50,7 +46,7 @@ brew "cmake"
 # Search tool like grep and The Silver Searcher
 brew "ripgrep"
 # OpenAI's coding agent that runs in your terminal
-brew "codex"
+cask "codex"
 # Get a file from an HTTP, HTTPS or FTP server
 brew "curl"
 # Run arbitrary commands when files change
@@ -123,8 +119,6 @@ brew "libxt"
 brew "lua"
 # Terminal image, video, directory, and Markdown viewer
 brew "mcat"
-# Intercept, modify, replay, save HTTP/S traffic
-brew "mitmproxy"
 # Simple tool to make locally trusted development certificates
 brew "mkcert"
 # NCurses Disk Usage
@@ -167,7 +161,6 @@ cask "aerospace"
 cask "arduino-ide"
 cask "bambu-studio"
 cask "bruno"
-cask "codex"
 cask "espanso"
 cask "figma"
 cask "font-hack-nerd-font"
