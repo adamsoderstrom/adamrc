@@ -65,17 +65,24 @@ return {
     "ruifm/gitlinker.nvim",
     dependencies = { "nvim-lua/plenary.nvim" },
     config = function()
-      vim.api.nvim_set_keymap(
-        "v",
-        "<leader>g$",
-        '<cmd>lua require"gitlinker".get_buf_range_url("v", {action_callback = require"gitlinker.actions".open_in_browser})<cr>',
-        {}
-      )
+      vim.api.nvim_set_keymap("n", "<leader>gY", '<cmd>lua require"gitlinker".get_repo_url()<cr>', { silent = true })
       vim.api.nvim_set_keymap(
         "n",
-        "<leader>g$",
-        '<cmd>lua require"gitlinker".get_buf_range_url("n", {action_callback = require"gitlinker.actions".open_in_browser})<cr>',
+        "<leader>gB",
+        '<cmd>lua require"gitlinker".get_repo_url({action_callback = require"gitlinker.actions".open_in_browser})<cr>',
         { silent = true }
+      )
+      vim.api.nvim_set_keymap(
+        "v",
+        "<leader>gY",
+        '<cmd>lua require"gitlinker".get_buf_range_url("v")<cr>',
+        { silent = true }
+      )
+      vim.api.nvim_set_keymap(
+        "v",
+        "<leader>gB",
+        '<cmd>lua require"gitlinker".get_buf_range_url("v", {action_callback = require"gitlinker.actions".open_in_browser})<cr>',
+        {}
       )
     end,
   },
