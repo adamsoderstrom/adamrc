@@ -59,17 +59,26 @@ return {
           }
         end,
       }
-      -- vim.o.background = "dark"
-      --
-      -- -- Override specific highlight groups
     end,
   },
-  -- {
-  --   "rebelot/kanagawa.nvim",
-  --   lazy = false,
-  --   priority = 1000,
-  --   config = function() vim.cmd "colorscheme kanagawa" end,
-  -- },
+  {
+    "ruifm/gitlinker.nvim",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    config = function()
+      vim.api.nvim_set_keymap(
+        "v",
+        "<leader>g$",
+        '<cmd>lua require"gitlinker".get_buf_range_url("v", {action_callback = require"gitlinker.actions".open_in_browser})<cr>',
+        {}
+      )
+      vim.api.nvim_set_keymap(
+        "n",
+        "<leader>g$",
+        '<cmd>lua require"gitlinker".get_buf_range_url("n", {action_callback = require"gitlinker.actions".open_in_browser})<cr>',
+        { silent = true }
+      )
+    end,
+  },
   {
     "L3MON4D3/LuaSnip",
     dependencies = { "rafamadriz/friendly-snippets" },
