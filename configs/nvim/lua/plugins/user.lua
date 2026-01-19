@@ -47,6 +47,8 @@ return {
             ["@keyword.export"] = { fg = colors.magenta },
             ["@keyword.import"] = { fg = colors.magenta },
             ["@lsp.type.interface"] = { fg = colors.yellow },
+            ["@lsp.mod.readonly.typescript"] = { fg = colors.cyan },
+            ["@lsp.typemod.variable.declaration.typescript"] = { fg = colors.yellow },
             ["@property"] = { fg = colors.yellow },
             ["@tag"] = { fg = colors.red },
             ["@tag.attribute"] = { fg = colors.yellow },
