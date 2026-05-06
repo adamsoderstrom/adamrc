@@ -6,61 +6,11 @@ return {
 
   -- == Examples of Overriding Plugins ==
 
-  -- customize alpha options
-  {
-    "goolord/alpha-nvim",
-    opts = function(_, opts)
-      -- customize the dashboard header
-      opts.section.header.val = {
-        -- It says neovim in `larry3d` style
-        "                               __                ",
-        "  ___      __    ___   __  __ /\\_\\    ___ ___    ",
-        "/' _ `\\  /'__`\\ / __`\\/\\ \\/\\ \\\\/\\ \\ /' __` __`\\  ",
-        "/\\ \\/\\ \\/\\  __//\\ \\L\\ \\ \\ \\_/ |\\ \\ \\/\\ \\/\\ \\/\\ \\ ",
-        "\\ \\_\\ \\_\\ \\____\\ \\____/\\ \\___/  \\ \\_\\ \\_\\ \\_\\ \\_\\",
-        " \\/_/\\/_/\\/____/\\/___/  \\/__/    \\/_/\\/_/\\/_/\\/_/",
-      }
-      return opts
-    end,
-  },
-
   -- You can disable default plugins as follows:
   -- { "max397574/better-escape.nvim", enabled = false },
 
   -- You can also easily customize additional setup of plugins that is outside of the plugin's setup call
-  {
-    "cpplain/flexoki.nvim",
-    lazy = false,
-    priority = 1000,
-    opts = {},
-    config = function()
-      vim.cmd "colorscheme flexoki"
-
-      require("flexoki").setup {
-        theme = "dark",
-        highlight_override = function(colors)
-          return {
-            ["@function"] = { fg = colors.paper },
-            ["@function.call"] = { fg = colors.red },
-            ["@function.method.call.typescript"] = { fg = colors.yellow },
-            ["@keyword"] = { fg = colors.magenta },
-            ["@keyword.export"] = { fg = colors.magenta },
-            ["@keyword.import"] = { fg = colors.magenta },
-            ["@lsp.type.interface"] = { fg = colors.yellow },
-            ["@lsp.mod.readonly.typescript"] = { fg = colors.cyan },
-            ["@lsp.typemod.variable.declaration.typescript"] = { fg = colors.yellow },
-            ["@property"] = { fg = colors.yellow },
-            ["@tag"] = { fg = colors.red },
-            ["@tag.attribute"] = { fg = colors.yellow },
-            ["@type"] = { fg = colors.yellow },
-            ["@type.import"] = { fg = colors.red },
-            ["@variable"] = { fg = colors.paper },
-            ["@variable.parameter"] = { fg = colors.paper },
-          }
-        end,
-      }
-    end,
-  },
+  { "ellisonleao/gruvbox.nvim", priority = 1000, config = true },
   {
     "ruifm/gitlinker.nvim",
     dependencies = { "nvim-lua/plenary.nvim" },

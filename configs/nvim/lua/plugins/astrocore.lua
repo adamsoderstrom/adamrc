@@ -13,7 +13,7 @@ return {
       large_buf = { size = 1024 * 256, lines = 10000 }, -- set global limits for large files for disabling features like treesitter
       autopairs = true, -- enable autopairs at start
       cmp = true, -- enable completion at start
-      diagnostics_mode = 3, -- diagnostic mode on start (0 = off, 1 = no signs/virtual text, 2 = no virtual text, 3 = on)
+      diagnostics = { virtual_text = true, virtual_lines = false }, -- diagnostic settings on startup
       highlighturl = true, -- highlight URLs at start
       notifications = true, -- enable notifications at start
     },
@@ -42,10 +42,12 @@ return {
     mappings = {
       -- first key is the mode
       n = {
+
         -- second key is the lefthand side of the map
 
         -- navigate buffer tabs
         ["L"] = { function() require("astrocore.buffer").nav(vim.v.count1) end, desc = "Next buffer" },
+        ["<leader>LR"] = { "<cmd>lsp restart<cr>", desc = "LSP Reload" },
         ["H"] = { function() require("astrocore.buffer").nav(-vim.v.count1) end, desc = "Previous buffer" },
 
         -- mappings seen under group name "Buffer"

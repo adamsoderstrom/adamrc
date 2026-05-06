@@ -1,25 +1,30 @@
--- in your user config: ~/.config/nvim/lua/plugins/treesitter.lua
+-- Customize Treesitter
+-- --------------------
+-- Treesitter customizations are handled with AstroCore
+-- as nvim-treesitter simply provides a download utility for parsers
+
+---@type LazySpec
 return {
-  "nvim-treesitter/nvim-treesitter",
-  opts = function(_, opts)
-    -- make sure textobjects is there
-    if not opts.ensure_installed then opts.ensure_installed = {} end
-    vim.list_extend(opts.ensure_installed, {
-      "javascript",
-      "tsx",
-      "typescript",
-      -- add more arguments for adding more treesitter parsers
-    })
-    opts.textobjects = opts.textobjects or {}
-    opts.textobjects.select = vim.tbl_deep_extend("force", opts.textobjects.select or {}, {
-      enable = true,
-      lookahead = true,
-      keymaps = {
-        -- calls
-        ["ac"] = "@call.outer",
-        ["ic"] = "@call.inner",
+  "AstroNvim/astrocore",
+  ---@type AstroCoreOpts
+  opts = {
+    treesitter = {
+      highlight = true, -- enable/disable treesitter based highlighting
+      indent = true, -- enable/disable treesitter based indentation
+      auto_install = true, -- enable/disable automatic installation of detected languages
+      ensure_installed = {
+        "lua",
+        "vim",
+        -- add more arguments for adding more treesitter parsers
       },
-    })
-    return opts
-  end,
+      textobjects = {
+        select = {
+          select_textobject = {
+            ["ac"] = { query = "@call.outer", desc = "Around call" },
+            ["ic"] = { query = "@call.inner", desc = "Inner call" },
+          },
+        },
+      },
+    },
+  },
 }
