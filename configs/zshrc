@@ -3,9 +3,6 @@ if [[ -n "$ZSH_DEBUGRC" ]]; then
   zmodload zsh/zprof
 fi
 
-# Path to your Homebrew installation.
-export PATH=/opt/homebrew/bin:$PATH
-export PATH=$PATH:/opt/homebrew/sbin
 
 # Path to your oh-my-zsh installation.
 # Please install it according to the installation docs: https://ohmyz.sh/#install
@@ -30,6 +27,10 @@ plugins+=(zsh-nvm)
 export NVM_AUTO_USE=true
 export NVM_NO_USE=true
 
+# Path to your Homebrew installation.
+export PATH=/opt/homebrew/bin:$PATH
+export PATH=$PATH:/opt/homebrew/sbin
+
 source $ZSH/oh-my-zsh.sh
 source $ADAM/scripts/index.sh
 source $ADAM/vars.sh
@@ -43,3 +44,5 @@ esac
 # pnpm end
 
 autoload -U compinit; compinit
+
+if command -v wt >/dev/null 2>&1; then eval "$(command wt config shell init zsh)"; fi
