@@ -47,7 +47,107 @@ return {
       luasnip.filetype_extend("javascript", { "javascriptreact" })
     end,
   },
-
+  {
+    "folke/snacks.nvim",
+    priority = 1000,
+    lazy = false,
+    ---@type snacks.Config
+    opts = {
+      -- your configuration comes here
+      -- or leave it empty to use the default settings
+      -- refer to the configuration section below
+      -- bigfile = { enabled = true },
+      -- dashboard = { enabled = true },
+      -- explorer = { enabled = true },
+      -- indent = { enabled = true },
+      -- input = { enabled = true },
+      -- picker = { enabled = true },
+      -- notifier = { enabled = true },
+      -- quickfile = { enabled = true },
+      -- scope = { enabled = true },
+      scroll = { enabled = true, animate = { duration = { step = 5, total = 50 } } },
+      -- statuscolumn = { enabled = true },
+      -- words = { enabled = true },
+    },
+  },
+  {
+    "folke/sidekick.nvim",
+    opts = {
+      -- add any options here
+      nes = { enabled = false },
+      cli = {
+        mux = {
+          backend = "tmux",
+          enabled = true,
+        },
+      },
+    },
+    keys = {
+      {
+        "<tab>",
+        function()
+          -- if there is a next edit, jump to it, otherwise apply it if any
+          if not require("sidekick").nes_jump_or_apply() then
+            return "<Tab>" -- fallback to normal tab
+          end
+        end,
+        expr = true,
+        desc = "Goto/Apply Next Edit Suggestion",
+      },
+      {
+        "<leader>aF",
+        function() require("sidekick.cli").focus() end,
+        desc = "Sidekick Focus",
+        mode = { "n", "t", "x" },
+      },
+      {
+        "<leader>aa",
+        function() require("sidekick.cli").toggle() end,
+        desc = "Sidekick Toggle CLI",
+      },
+      {
+        "<leader>as",
+        function() require("sidekick.cli").select() end,
+        -- Or to select only installed tools:
+        -- require("sidekick.cli").select({ filter = { installed = true } })
+        desc = "Select CLI",
+      },
+      {
+        "<leader>ad",
+        function() require("sidekick.cli").close() end,
+        desc = "Detach a CLI Session",
+      },
+      {
+        "<leader>at",
+        function() require("sidekick.cli").send { msg = "{this}" } end,
+        mode = { "x", "n" },
+        desc = "Send This",
+      },
+      {
+        "<leader>af",
+        function() require("sidekick.cli").send { msg = "{file}" } end,
+        desc = "Send File",
+      },
+      {
+        "<leader>av",
+        function() require("sidekick.cli").send { msg = "{selection}" } end,
+        mode = { "x" },
+        desc = "Send Visual Selection",
+      },
+      {
+        "<leader>ap",
+        function() require("sidekick.cli").prompt() end,
+        mode = { "n", "x" },
+        desc = "Sidekick Select Prompt",
+      },
+      -- Example of a keybinding to open Claude directly
+      {
+        "<leader>ac",
+        function() require("sidekick.cli").toggle { name = "claude", focus = true } end,
+        desc = "Sidekick Toggle Claude",
+      },
+    },
+  },
   {
     "windwp/nvim-autopairs",
     config = function(plugin, opts)

@@ -10,11 +10,11 @@ return {
       -- Make sure to use the names found in `:Mason`
       ensure_installed = {
         -- install language servers
-        "lua-language-server",
-        "typescript-language-server",
-        "tailwindcss-language-server",
         "css-lsp",
         "eslint-lsp",
+        "lua-language-server",
+        "tailwindcss-language-server",
+        "typescript-language-server",
 
         -- install formatters
         "stylua",
